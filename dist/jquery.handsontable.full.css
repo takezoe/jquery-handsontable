@@ -205,11 +205,12 @@
 }
 
 /* fill handle */
-
+/*
 .handsontable .wtBorder.corner {
   font-size: 0;
   cursor: crosshair;
 }
+*/
 
 .handsontable .htBorder.htFillBorder {
   background: red;

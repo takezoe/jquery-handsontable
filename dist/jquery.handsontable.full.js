@@ -9233,7 +9233,7 @@ if (typeof Handsontable !== 'undefined') {
 
     $(document).on('mousemove.' + this.guid, function (event) {
       if (listening) {
-        dragToScroll.check(event.clientX, event.clientY);
+        //dragToScroll.check(event.clientX, event.clientY);
       }
     });
   });
@@ -10763,7 +10763,7 @@ function WalkontableEvent(instance) {
   };
 
   $(this.instance.wtTable.holder).on('mousedown', onMouseDown);
-  $(this.instance.wtTable.TABLE).on('mouseover', onMouseOver);
+//  $(this.instance.wtTable.TABLE).on('mouseover', onMouseOver);
 //  $(this.instance.wtTable.TABLE).on('mouseout', onMouseOut);
   $(this.instance.wtTable.holder).on('mouseup', onMouseUp);
 }
