@@ -5519,26 +5519,26 @@ Handsontable.SelectionPoint.prototype.arr = function (arr) {
   AutocompleteEditor.prototype.updateChoicesList = function (choices) {
     this.$htContainer.handsontable('loadData', Handsontable.helper.pivot([choices]));
 
-    var value = this.getValue();
-    var rowToHighlight;
-
-    if(this.cellProperties.strict === true){
-
-      rowToHighlight = findItemIndexToHighlight(choices, value);
-
-      if ( typeof rowToHighlight == 'undefined' && this.cellProperties.allowInvalid === false){
-        rowToHighlight = 0;
-      }
-
-    }
-
-    if(typeof rowToHighlight == 'undefined'){
-      this.$htContainer.handsontable('deselectCell');
-    } else {
-      this.$htContainer.handsontable('selectCell', rowToHighlight, 0);
-    }
-
-    this.focus();
+//    var value = this.getValue();
+//    var rowToHighlight;
+//
+//    if(this.cellProperties.strict === true){
+//
+//      rowToHighlight = findItemIndexToHighlight(choices, value);
+//
+//      if ( typeof rowToHighlight == 'undefined' && this.cellProperties.allowInvalid === false){
+//        rowToHighlight = 0;
+//      }
+//
+//    }
+//
+//    if(typeof rowToHighlight == 'undefined'){
+//      this.$htContainer.handsontable('deselectCell');
+//    } else {
+//      this.$htContainer.handsontable('selectCell', rowToHighlight, 0);
+//    }
+//
+//    this.focus();
   };
 
   Handsontable.editors.AutocompleteEditor = AutocompleteEditor;
