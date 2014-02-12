@@ -191,6 +191,50 @@ describe('CopyPaste plugin', function () {
 
     });
 
+    it("should not throw error when no cell is selected (#1221)", function () {
+
+      handsontable({
+        data: createSpreadsheetData(2, 2)
+      });
+
+      selectCell(0, 0);
+      deselectCell();
+
+      function keydownCtrl(){
+        $(document).trigger($.Event('keydown', {
+          keyCode: Handsontable.helper.keyCode.COMMAND_LEFT
+        }));
+      }
+
+      expect(keydownCtrl).not.toThrow();  //expect no to throw any exception
+
+    });
+
+    it("should set copyable text when selecting a single cell with specified type and hitting ctrl (#1300)", function () {
+      handsontable({
+        data: [['A', 1], ['B', 2]],
+        columns: [
+          {
+            type: 'text'
+          },
+          {
+            type: 'numeric'
+          }
+        ]
+      });
+
+      var copyPasteTextarea = $('textarea.copyPaste');
+
+      expect(copyPasteTextarea.val().length).toEqual(0);
+
+      selectCell(0, 0, 1, 1);
+      keyDownUp(Handsontable.helper.keyCode.CONTROL_LEFT);
+
+      expect(copyPasteTextarea.val()).toEqual('A\t1\nB\t2\n');
+
+    });
+
+
     describe("working with multiple tables", function () {
 
       beforeEach(function () {

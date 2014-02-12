@@ -1,3 +1,39 @@
+## [0.10.3](https://github.com/warpech/jquery-handsontable/tree/v0.10.3) (Feb 10, 2014)
+
+Changes since 0.10.2:
+
+- fixed undoing/redoing remove rows/columns form tables with `minSpareRows`/`minSpareCols` ([#1262](https://github.com/warpech/jquery-handsontable/issues/1262))
+- `dateEditor` now allows to type date manually ([#1266](https://github.com/warpech/jquery-handsontable/issues/1266))
+- fixed typing any value in `autocompleteEditor`, when `filter` property is set to `true` ([#1275](https://github.com/warpech/jquery-handsontable/issues/1275))
+- values typed in `autocompleteEditor` and `dropdownEditor` won't be recognized as regex anymore ([#1295](https://github.com/warpech/jquery-handsontable/issues/1295))
+- fixed copying values from cells with explicitly set `type` property ([#1300](https://github.com/warpech/jquery-handsontable/issues/1300))
+
+
+## [0.10.2](https://github.com/warpech/jquery-handsontable/tree/v0.10.2) (Jan 23, 2014)
+
+Features:
+
+- new configuration option `copyable` lets you define which cells can be copied to the clipboard using the keyboard shortcut (using CTRL+C, CTRL+V). The default value is `true` for all cells with one exception - see the next point)
+- `password` cell type value can no longer be copied to the clipboard (unless you explicitly set option `copyable: true`)
+
+Developer changes:
+
+- added `.editorconfig` file. See [http://editorconfig.org/](http://editorconfig.org/) for details
+- moved Handsontable.DataMap class to a separate file
+
+## [0.10.1](https://github.com/warpech/jquery-handsontable/tree/v0.10.1) (Jan 12, 2014)
+
+Changes since 0.10.0:
+
+- fixed handling copyPaste plugin, when no cell is selected ([#1221](https://github.com/warpech/jquery-handsontable/issues/1221))
+- fixed invoking cell renderers by autoColumnSize plugin ([#1253](https://github.com/warpech/jquery-handsontable/issues/1253))
+- fixed WeakMap shim for IE8 ([#1251](https://github.com/warpech/jquery-handsontable/issues/1251))
+- fixed removing rows from a sorted table ([#1072](https://github.com/warpech/jquery-handsontable/issues/1072))
+- fixed handling contextMenu plugin with multiple Handsontable instances ([#1238](https://github.com/warpech/jquery-handsontable/issues/1238))
+- cell editor won't open after pressing <kbd>ALT</kbd> ([#1239](https://github.com/warpech/jquery-handsontable/issues/1239))
+- improved Web Components binding of Handsontable configuration to DOM properties
+
+
 ## [0.10.0](https://github.com/warpech/jquery-handsontable/tree/v0.10.0) (Dec 27, 2013)
 
 Changes since beta4:

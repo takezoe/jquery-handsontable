@@ -49,7 +49,8 @@ Handsontable.helper.isMetaKey = function (keyCode) {
     keyCodes.ENTER,
     keyCodes.ESCAPE,
     keyCodes.SHIFT,
-    keyCodes.CAPS_LOCK
+    keyCodes.CAPS_LOCK,
+    keyCodes.ALT
   ];
 
   return metaKeys.indexOf(keyCode) != -1;
@@ -301,6 +302,7 @@ Handsontable.helper.keyCode = {
   CONTROL_LEFT: 91,
   COMMAND_LEFT: 17,
   COMMAND_RIGHT: 93,
+  ALT: 18,
   HOME: 36,
   PAGE_DOWN: 34,
   PAGE_UP: 33,
@@ -381,7 +383,26 @@ Handsontable.helper.proxy = function (fun, context) {
   };
 };
 
-Handsontable.helper.cellMethodLookupFactory = function (methodName) {
+/**
+ * Factory that produces a function for searching methods (or any properties) which could be defined directly in
+ * table configuration or implicitly, within cell type definition.
+ *
+ * For example: renderer can be defined explicitly using "renderer" property in column configuration or it can be
+ * defined implicitly using "type" property.
+ *
+ * Methods/properties defined explicitly always takes precedence over those defined through "type".
+ *
+ * If the method/property is not found in an object, searching is continued recursively through prototype chain, until
+ * it reaches the Object.prototype.
+ *
+ *
+ * @param methodName {String} name of the method/property to search (i.e. 'renderer', 'validator', 'copyable')
+ * @param allowUndefined {Boolean} [optional] if false, the search is continued if methodName has not been found in cell "type"
+ * @returns {Function}
+ */
+Handsontable.helper.cellMethodLookupFactory = function (methodName, allowUndefined) {
+
+  allowUndefined = typeof allowUndefined == 'undefined' ? true : allowUndefined;
 
   return function cellMethodLookup (row, col) {
 
@@ -406,7 +427,12 @@ Handsontable.helper.cellMethodLookupFactory = function (methodName) {
 
         type = translateTypeNameToObject(properties.type);
 
-        return type[methodName]; //method defined in type. if does not exist (eg. validator), returns undefined
+        if (type.hasOwnProperty(methodName)) {
+          return type[methodName]; //method defined in type.
+        } else if (allowUndefined) {
+          return; //method does not defined in type (eg. validator), returns undefined
+        }
+
       }
 
       return getMethodFromProperties(Handsontable.helper.getPrototypeOf(properties));
