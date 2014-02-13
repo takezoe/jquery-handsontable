@@ -1189,6 +1189,10 @@ Handsontable.Core = function (rootElement, userSettings) {
       if (typeof input[i][1] !== 'number') {
         throw new Error('Method `setDataAtCell` accepts row and column number as its parameters. If you want to use object property name, use method `setDataAtRowProp`');
       }
+      var meta = instance.getCellMeta(input[i][0], input[i][1]);
+      if(meta.type == 'numeric'){
+        input[i][2] = input[i][2].replace(/(^¥|,)/g, '');
+      }
       prop = datamap.colToProp(input[i][1]);
       changes.push([
         input[i][0],
